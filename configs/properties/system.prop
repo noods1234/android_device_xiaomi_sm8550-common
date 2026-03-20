@@ -1,7 +1,7 @@
 # Media
 media.aac_51_output_enabled=true
 media.settings.xml=/vendor/etc/media_profiles_kalama.xml
-ro.media.recorder-max-base-layer-fps=60
+ro.media.recorder-max-base-layer-fps=120
 
 # NFC
 ro.nfc.port=I2C

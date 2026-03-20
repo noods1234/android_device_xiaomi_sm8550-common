@@ -14,8 +14,9 @@ persist.vendor.qcom.bluetooth.aac_vbr_ctl.enabled=true
 persist.vendor.qcom.bluetooth.aptxadaptiver2_1_support=true
 
 # Camera
-camera.disable_zsl_mode=true
+camera.disable_zsl_mode=false
 ro.camera.enableCamera1MaxZsl=1
+persist.vendor.camera.raw.enabled=1
 
 # Display
 persist.sys.sf.native_mode=258
@@ -77,3 +78,4 @@ ro.vendor.radio.build_region=global
 
 # USB
 ro.usb.uvc.enabled=true
+persist.vendor.audio.usb.perf_mode=1

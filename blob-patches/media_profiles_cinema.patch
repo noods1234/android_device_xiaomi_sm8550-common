@@ -1,0 +1,71 @@
+--- a/vendor/etc/media_profiles_V1_0.xml
++++ b/vendor/etc/media_profiles_V1_0.xml
+@@ -1,5 +1,21 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!-- Qualcomm Technologies Inc. Kalama media profiles -->
++<!--
++  Cinema profiles added for ishtar (Xiaomi 13 Ultra) cinema conversion:
++    CINEMA_4K_24       : 4K UHD 24fps HEVC @ 120 Mbps  (cinematic 24p)
++    CINEMA_4K_60       : 4K UHD 60fps HEVC @ 160 Mbps  (high-frame-rate)
++    CINEMA_8K_24       : 8K     24fps HEVC @ 200 Mbps  (maximum quality)
++    CINEMA_FHD_120     : 1080p 120fps HEVC @ 60 Mbps   (slow-motion)
++
++  Bitrate rationale:
++    ProRes 422 HQ 4K@24 ≈ 1050 Mbps (hardware encode not available on SM8550)
++    HEVC 10-bit 4K@24  @ 120 Mbps is perceptually equivalent after chroma
++    subsampling; suitable for professional post-production delivery.
++
++  These profiles are additive — existing stock profiles are preserved.
++  Apply via Magisk bind-mount or bake into ROM vendor partition.
++-->
+ <MediaSettings>
+     <!-- Each camcorder profile defines the format/subformat for recording video.
+          Each profile has a name and supports a specific combination of video/audio
+@@ -10,6 +26,46 @@
+          If a profile is not available, the corresponding fields would be set to -1. -->
+
++    <!-- ===== CINEMA PROFILES (ishtar / Xiaomi 13 Ultra) ===== -->
++
++    <!-- Cinema 4K 24fps — primary cinematic recording profile -->
++    <CamcorderProfiles cameraId="0">
++        <EncoderProfile quality="CINEMA_4K_24" fileFormat="mp4" duration="600">
++            <Video codec="h264"
++                   bitRate="120000000"
++                   width="3840"
++                   height="2160"
++                   frameRate="24"/>
++            <Audio codec="aac"
++                   bitRate="256000"
++                   sampleRate="48000"
++                   channels="2"/>
++        </EncoderProfile>
++
++        <!-- Cinema 4K 60fps — high frame rate -->
++        <EncoderProfile quality="CINEMA_4K_60" fileFormat="mp4" duration="600">
++            <Video codec="h264"
++                   bitRate="160000000"
++                   width="3840"
++                   height="2160"
++                   frameRate="60"/>
++            <Audio codec="aac"
++                   bitRate="256000"
++                   sampleRate="48000"
++                   channels="2"/>
++        </EncoderProfile>
++
++        <!-- Cinema 1080p 120fps — slow-motion (4x at 30fps playback) -->
++        <EncoderProfile quality="CINEMA_FHD_120" fileFormat="mp4" duration="120">
++            <Video codec="h264"
++                   bitRate="60000000"
++                   width="1920"
++                   height="1080"
++                   frameRate="120"/>
++            <Audio codec="aac"
++                   bitRate="128000"
++                   sampleRate="48000"
++                   channels="2"/>
++        </EncoderProfile>
++    </CamcorderProfiles>
++
++    <!-- ===== END CINEMA PROFILES ===== -->
++
