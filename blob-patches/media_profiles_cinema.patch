@@ -1,6 +1,6 @@
 --- a/vendor/etc/media_profiles_kalama.xml
 +++ b/vendor/etc/media_profiles_kalama.xml
-@@ -1,5 +1,62 @@
+@@ -1,5 +1,61 @@
  <?xml version="1.0" encoding="utf-8"?>
  <!-- Qualcomm Technologies Inc. Kalama media profiles -->
 +<!--
@@ -10,7 +10,6 @@
 +    "4kdci"           → CAMCORDER_QUALITY_4KDCI     — 4K 24fps cinematic primary
 +    "highspeed2160p"  → CAMCORDER_QUALITY_HIGH_SPEED_2160P — 4K 60fps HFR
 +    "highspeed1080p"  → CAMCORDER_QUALITY_HIGH_SPEED_1080P — 1080p 120fps slow-mo
-+    "8kuhd"           → CAMCORDER_QUALITY_8KUHD      — 8K 24fps maximum quality
 +
 +  NOTE: If stock kalama profiles also define these quality names, THIS block wins
 +  because it is inserted BEFORE the stock <CamcorderProfiles cameraId="0"> block.

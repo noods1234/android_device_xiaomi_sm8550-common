@@ -1,7 +1,6 @@
 # Audio
 persist.vendor.audio.misoundasc=true
 persist.vendor.audio.misound.disable=true
-persist.vendor.audio.usb.perf_mode=1
 ro.audio.monitorRotation=true
 ro.audio.spatializer_enabled=true
 ro.vendor.audio.feature.spatial=7
@@ -15,9 +14,8 @@ persist.vendor.qcom.bluetooth.aac_vbr_ctl.enabled=true
 persist.vendor.qcom.bluetooth.aptxadaptiver2_1_support=true
 
 # Camera
-camera.disable_zsl_mode=false
+camera.disable_zsl_mode=true
 ro.camera.enableCamera1MaxZsl=1
-persist.vendor.camera.raw.enabled=1
 
 # Display
 persist.sys.sf.native_mode=258
