@@ -13,21 +13,25 @@
 
     <!-- Indicate available ColorDisplayManager.COLOR_MODE_xxx.
          Cinema reference mappings (Xiaomi DisplayFeature HAL modes):
-           258 = Vivid        (enhanced saturation, default consumer mode)
-           256 = Saturated    (boosted saturation)
-           257 = Standard     (balanced, Rec.709-adjacent gamut)
-           269 = Original     (native panel, no gamut mapping)
-           268 = P3           (Display P3 / DCI-P3 gamut — cinema monitoring reference)
-           267 = sRGB         (sRGB = Rec.709 primaries, D65 white point — broadcast reference)
-         For cinema use: mode 268 (P3) for theatrical/DCI monitoring;
-                         mode 267 (sRGB/Rec.709) for broadcast/streaming monitoring. -->
+           258 = Vivid     (enhanced saturation, default consumer mode)
+           256 = Saturated (boosted saturation)
+           257 = Standard  (balanced, Rec.709-adjacent gamut)
+           269 = Original  (native panel, no gamut mapping)
+           268 = P3        (Display P3: DCI-P3 primaries + D65 white point + sRGB-like gamma.
+                            NOTE: this is Display P3, not theatrical DCI-P3 which uses ~6300K
+                            white point and gamma 2.6. Suitable for P3 wide-gamut monitoring.)
+           267 = sRGB      (sRGB primaries + D65 white point + sRGB gamma ~2.2. Shares Rec.709
+                            primaries but differs from Rec.709/BT.1886 studio monitoring gamma
+                            2.4. Useful for Rec.709-primary content review at sRGB gamma.)
+         For cinema use: mode 268 for Display P3 / wide-gamut monitoring;
+                         mode 267 for Rec.709-primary content review. -->
     <integer-array name="config_availableColorModes">
         <item>258</item> <!-- vivid -->
         <item>256</item> <!-- saturated -->
         <item>257</item> <!-- standard -->
         <item>269</item> <!-- original -->
-        <item>268</item> <!-- p3 / dci-p3 cinema monitor -->
-        <item>267</item> <!-- srgb / rec.709 broadcast monitor -->
+        <item>268</item> <!-- display p3 (wide-gamut cinema monitor) -->
+        <item>267</item> <!-- srgb (rec.709-primary content review) -->
     </integer-array>
 
     <!-- Indicate whether to allow the device to suspend when the screen is off

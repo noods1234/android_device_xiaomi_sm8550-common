@@ -1,6 +1,7 @@
 # Audio
 persist.vendor.audio.misoundasc=true
 persist.vendor.audio.misound.disable=true
+persist.vendor.audio.usb.perf_mode=1
 ro.audio.monitorRotation=true
 ro.audio.spatializer_enabled=true
 ro.vendor.audio.feature.spatial=7
@@ -78,4 +79,3 @@ ro.vendor.radio.build_region=global
 
 # USB
 ro.usb.uvc.enabled=true
-persist.vendor.audio.usb.perf_mode=1
