@@ -1,6 +1,6 @@
 --- a/vendor/etc/media_profiles_kalama.xml
 +++ b/vendor/etc/media_profiles_kalama.xml
-@@ -1,5 +1,59 @@
+@@ -1,5 +1,62 @@
  <?xml version="1.0" encoding="utf-8"?>
  <!-- Qualcomm Technologies Inc. Kalama media profiles -->
 +<!--
@@ -12,10 +12,13 @@
 +    "highspeed1080p"  → CAMCORDER_QUALITY_HIGH_SPEED_1080P — 1080p 120fps slow-mo
 +    "8kuhd"           → CAMCORDER_QUALITY_8KUHD      — 8K 24fps maximum quality
 +
-+  NOTE: If stock kalama profiles already define any of these quality names, the
-+  later-parsed entry wins (Android accumulates profiles across duplicate cameraId
-+  blocks; last write for a given quality wins). The cinema settings intentionally
-+  override stock equivalents with cinema-grade bitrates.
++  NOTE: If stock kalama profiles also define these quality names, THIS block wins
++  because it is inserted BEFORE the stock <CamcorderProfiles cameraId="0"> block.
++  Android's MediaProfiles parser accumulates all EncoderProfile entries from every
++  CamcorderProfiles block with the same cameraId, but getCamcorderProfileIndex()
++  returns the FIRST match (breaks on first hit — verified in AOSP android-13.0.0_r1
++  MediaProfiles.cpp). Earlier-in-file entries take priority; the stock profiles for
++  these quality names are shadowed, not replaced.
 +
 +  Bitrate rationale:
 +    HEVC 10-bit 4K@24  @ 120 Mbps — perceptually lossless for post-production
