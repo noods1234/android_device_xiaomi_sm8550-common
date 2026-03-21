@@ -1,5 +1,5 @@
 # Audio
-vendor.audio.hdr.record.enable=false
+vendor.audio.hdr.record.enable=true
 
 # Display
 persist.sys.sf.color_mode=0

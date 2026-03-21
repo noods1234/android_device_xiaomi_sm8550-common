@@ -14,8 +14,8 @@
         <item>Saturated</item>
         <item>Standard</item>
         <item>Original</item>
-        <item>P3</item>
-        <item>sRGB</item>
+        <item>Display P3</item>
+        <item>sRGB / Rec.709</item>
     </string-array>
 
     <!-- Display settings screen, Color mode options. Must be the same length and order as
