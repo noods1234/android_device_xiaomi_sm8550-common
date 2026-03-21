@@ -71,7 +71,7 @@
 +        </EncoderProfile>
 +
 +        <!-- Cinema 4K 60fps — high frame rate broadcast master (HEVC) -->
-+        <EncoderProfile quality="highspeed2160p" fileFormat="mp4" duration="600">
++        <EncoderProfile quality="highspeed2160p" fileFormat="mp4" duration="300">
 +            <Video codec="hevc"
 +                   bitRate="160000000"
 +                   width="3840"
