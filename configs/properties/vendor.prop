@@ -1,9 +1,13 @@
 # Audio
-persist.vendor.audio.misoundasc=true
+# MiSound ASC (adaptive loudness) disabled: consistent with misound.disable; prevents
+# dynamics processing from masking true levels during monitoring playback.
+persist.vendor.audio.misoundasc=false
 persist.vendor.audio.misound.disable=true
 ro.audio.monitorRotation=true
-ro.audio.spatializer_enabled=true
-ro.vendor.audio.feature.spatial=7
+# Spatializer disabled: spatial transforms on output alter the dry mix, making
+# on-device monitoring non-representative of the recorded signal.
+ro.audio.spatializer_enabled=false
+ro.vendor.audio.feature.spatial=0
 ro.vendor.audio.misound.bluetooth.enable=false
 
 # Bluetooth
@@ -21,15 +25,24 @@ ro.camera.enableCamera1MaxZsl=1
 persist.sys.sf.native_mode=257
 ro.vendor.display.ai_disp.enable=false
 ro.vendor.display.mi_calib.enable=true
-ro.vendor.display.nature_mode.enable=true
+# Nature mode (blue-light filter) disabled: engagement during colour monitoring
+# shifts the white point toward amber, corrupting any colorimetric reference work.
+ro.vendor.display.nature_mode.enable=false
 ro.vendor.display.type=oled
 ro.vendor.displayfeature.dump=true
 ro.vendor.fps.switch.default=true
-ro.vendor.fps.switch.thermal=true
-ro.vendor.hbm_backlight.enable=true
+# Thermal frame rate switching disabled: automatic refresh rate changes during
+# sustained recording would alter motion cadence during monitoring.
+ro.vendor.fps.switch.thermal=false
+# HBM disabled: High Brightness Mode changes panel luminance characteristics
+# beyond the calibrated operating point, invalidating display-based exposure
+# and colour monitoring. Ambient sensor triggers must not alter the reference.
+ro.vendor.hbm_backlight.enable=false
 ro.vendor.histogram.enable=true
-ro.vendor.localhbm.enable=true
-ro.vendor.thermal.dimming.enable=true
+ro.vendor.localhbm.enable=false
+# Thermal display dimming disabled: brightness must remain stable during
+# sustained recording sessions so that monitoring luminance is consistent.
+ro.vendor.thermal.dimming.enable=false
 ro.vendor.xiaomi.bl.poll=true
 
 # DPM
