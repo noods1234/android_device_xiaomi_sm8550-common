@@ -210,6 +210,8 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/libqtikeymint.so',
     ): blob_fixup()
         .add_needed('android.hardware.security.rkp-V3-ndk.so'),
+    'vendor/etc/media_profiles_kalama.xml': blob_fixup()
+        .patch_file('blob-patches/media_profiles_cinema.patch'),
     'vendor/etc/seccomp_policy/c2audio.vendor.ext-arm64.policy': blob_fixup()
         .add_line_if_missing('setsockopt: 1'),
     'vendor/etc/seccomp_policy/qwesd@2.0.policy': blob_fixup()
