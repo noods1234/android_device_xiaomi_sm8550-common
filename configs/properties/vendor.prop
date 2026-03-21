@@ -6,8 +6,11 @@ persist.vendor.audio.misound.disable=true
 ro.audio.monitorRotation=true
 # Spatializer disabled: spatial transforms on output alter the dry mix, making
 # on-device monitoring non-representative of the recorded signal.
+# ro.audio.spatializer_enabled is the AOSP-standard control (Spatializer.cpp).
+# ro.vendor.audio.feature.spatial is NOT overridden: its bitmask definitions are
+# opaque to this tree and clearing all bits could disable audio input features
+# (e.g. QAHDR multi-capsule processing) beyond the targeted output spatializer.
 ro.audio.spatializer_enabled=false
-ro.vendor.audio.feature.spatial=0
 ro.vendor.audio.misound.bluetooth.enable=false
 
 # Bluetooth

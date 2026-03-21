@@ -375,11 +375,11 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="8000 11025 12000 16000 22050 24000 32000 44100 48000"
                              channelMasks="AUDIO_CHANNEL_IN_MONO AUDIO_CHANNEL_IN_STEREO AUDIO_CHANNEL_IN_FRONT_BACK"/>
-                    <!-- 24-bit capture paths — unlocks record_24 mix port routing via WCD939x ADC -->
+                    <!-- 24-bit capture path — unlocks record_24 mix port routing via WCD939x ADC.
+                         PCM_24_BIT_PACKED only: PCM_FLOAT is not supported for built-in mic
+                         capture on the QTI VA macro; advertising it would create a false
+                         capability that routes to the HAL and fails with BAD_VALUE. -->
                     <profile name="" format="AUDIO_FORMAT_PCM_24_BIT_PACKED"
-                             samplingRates="48000 96000"
-                             channelMasks="AUDIO_CHANNEL_IN_MONO AUDIO_CHANNEL_IN_STEREO AUDIO_CHANNEL_IN_FRONT_BACK"/>
-                    <profile name="" format="AUDIO_FORMAT_PCM_FLOAT"
                              samplingRates="48000 96000"
                              channelMasks="AUDIO_CHANNEL_IN_MONO AUDIO_CHANNEL_IN_STEREO AUDIO_CHANNEL_IN_FRONT_BACK"/>
                     <!-- To support compress offload capture such that client can query -->
@@ -394,11 +394,9 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="8000 11025 12000 16000 22050 24000 32000 44100 48000"
                              channelMasks="AUDIO_CHANNEL_IN_MONO AUDIO_CHANNEL_IN_STEREO AUDIO_CHANNEL_IN_FRONT_BACK"/>
-                    <!-- 24-bit capture paths — unlocks record_24 mix port routing via WCD939x ADC -->
+                    <!-- 24-bit capture path — unlocks record_24 mix port routing via WCD939x ADC.
+                         PCM_24_BIT_PACKED only: same rationale as Built-In Mic above. -->
                     <profile name="" format="AUDIO_FORMAT_PCM_24_BIT_PACKED"
-                             samplingRates="48000 96000"
-                             channelMasks="AUDIO_CHANNEL_IN_MONO AUDIO_CHANNEL_IN_STEREO AUDIO_CHANNEL_IN_FRONT_BACK"/>
-                    <profile name="" format="AUDIO_FORMAT_PCM_FLOAT"
                              samplingRates="48000 96000"
                              channelMasks="AUDIO_CHANNEL_IN_MONO AUDIO_CHANNEL_IN_STEREO AUDIO_CHANNEL_IN_FRONT_BACK"/>
                 </devicePort>
