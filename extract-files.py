@@ -202,14 +202,43 @@ blob_fixups: blob_fixups_user_type = {
         ),
     'system_ext/framework/mirilhook.jar': blob_fixup()
         .apktool_patch('blob-patches/mirilhook.patch', '-r'),
+    # modemManager embeds SHA-256 fingerprints of its QESDK (Qualcomm E-Commerce SDK)
+    # dependency libraries and validates them at runtime.  libqesdk2_0.so and
+    # libqesdk_manager.so are carrier/commercial SDK blobs not present in AOSP
+    # builds; leaving the fingerprints intact causes modemManager to abort with a
+    # dlopen / integrity-check failure on first use.  Replacing each hash with
+    # SHA-256("") (the canonical null fingerprint) disables the check and allows
+    # modemManager to start without those libraries.
+    #
+    # Fragility note: these hashes are embedded as literal byte strings in the
+    # binary; if modemManager is relinked in a future Xiaomi blob drop the offsets
+    # may shift and binary_regex_replace will silently miss.  Symptom: modemManager
+    # crashes at boot with "library not found" or integrity failure.
+    # Verification: after extraction run
+    #   grep -c <original_hash_hex> vendor/bin/modemManager
+    # and confirm output is 0 (replaced); non-zero means the fixup missed.
     'vendor/bin/modemManager' : blob_fixup()
-        .binary_regex_replace(b'fbec992f7f41a65ac8000aeda1bc634e24a12c7513faae379ae889a53553325a', b'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855')  # /vendor/lib/libqesdk2_0.so
-        .binary_regex_replace(b'40821d2c697710a692462776324a4b913935878b3b5f2232a2cd297a6f3ff37f', b'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'), # /vendor/lib/libqesdk_manager.so
+        .binary_regex_replace(b'fbec992f7f41a65ac8000aeda1bc634e24a12c7513faae379ae889a53553325a', b'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855')  # libqesdk2_0.so fingerprint → SHA-256("")
+        .binary_regex_replace(b'40821d2c697710a692462776324a4b913935878b3b5f2232a2cd297a6f3ff37f', b'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'), # libqesdk_manager.so fingerprint → SHA-256("")
     (
         'vendor/bin/hw/android.hardware.security.keymint-service-qti',
         'vendor/lib64/libqtikeymint.so',
     ): blob_fixup()
         .add_needed('android.hardware.security.rkp-V3-ndk.so'),
+    # Cinema media profiles patch: inserts CamcorderProfiles blocks for both cameras
+    # before the stock Qualcomm blocks so the first-match parser in MediaProfiles.java
+    # returns cinema specs (HEVC, high bitrate) for shared quality names (2160p, 1080p).
+    #
+    # Failure modes:
+    #   Hunk mismatch (stock XML changed in a new Xiaomi drop) → patch(1) returns non-zero
+    #     and extraction aborts with "Hunk FAILED at …"; fix by regenerating the patch
+    #     against the new stock file: diff -u stock.xml patched.xml > media_profiles_cinema.patch
+    #   HAL ignores unsupported profiles at runtime (no error, profile silently absent) →
+    #     verify with: adb shell dumpsys media.camera | grep -i profile
+    #     or check logcat tag MediaProfiles after first camera open.
+    #   Sentinel check after extraction (confirms patch landed):
+    #     grep -c '4kdci' vendor/xiaomi/sm8550-common/vendor/etc/media_profiles_kalama.xml
+    #     must return ≥ 1; zero means the file was replaced post-patch or patch missed.
     'vendor/etc/media_profiles_kalama.xml': blob_fixup()
         .patch_file('blob-patches/media_profiles_cinema.patch'),
     'vendor/etc/seccomp_policy/c2audio.vendor.ext-arm64.policy': blob_fixup()
