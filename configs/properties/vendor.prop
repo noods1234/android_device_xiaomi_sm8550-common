@@ -22,8 +22,7 @@ persist.vendor.qcom.bluetooth.aptxadaptiver2_1_support=true
 
 # Camera
 # ZSL disabled pending HAL compatibility validation on the Xiaomi CamX stack.
-# Re-enable by setting camera.disable_zsl_mode=false and ro.camera.enableCamera1MaxZsl=1
-# once confirmed that CONTROL_CAPTURE_INTENT_ZERO_SHUTTER_LAG does not crash cameraserver.
+# Re-enable once CONTROL_CAPTURE_INTENT_ZERO_SHUTTER_LAG is confirmed stable.
 camera.disable_zsl_mode=true
 ro.camera.enableCamera1MaxZsl=0
 
