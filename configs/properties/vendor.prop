@@ -21,7 +21,10 @@ persist.vendor.qcom.bluetooth.aac_vbr_ctl.enabled=true
 persist.vendor.qcom.bluetooth.aptxadaptiver2_1_support=true
 
 # Camera
-camera.disable_zsl_mode=true
+# ZSL enabled for Camera2 complete control: allows CONTROL_CAPTURE_INTENT_ZERO_SHUTTER_LAG,
+# burst capture, and reprocessing streams. The HAL maintains a circular pre-capture buffer
+# so stills can be pulled from a running preview without a capture latency penalty.
+camera.disable_zsl_mode=false
 ro.camera.enableCamera1MaxZsl=1
 
 # Display

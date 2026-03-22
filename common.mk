@@ -95,6 +95,26 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.2-service
 
 # Camera
+# Permission declarations for Camera2 FULL hardware level:
+#   camera.flash-autofocus  — bundles android.hardware.camera (base), autofocus, flash
+#   camera.front            — front camera
+#   camera.full             — Camera2 FULL level (manual sensor, manual lens, RAW, ZSL, reprocessing)
+#   camera.raw              — RAW_SENSOR output stream
+#   camera.concurrent       — simultaneous front+rear streaming
+# ZSL is re-enabled in vendor.prop (camera.disable_zsl_mode=false) to expose
+# CONTROL_CAPTURE_INTENT_ZERO_SHUTTER_LAG, burst capture, and YUV reprocessing.
+#
+# CameraX (future builds):
+#   CameraX is an AndroidX Jetpack library that wraps Camera2. No device-tree changes
+#   are needed for basic CameraX support — it inherits whatever Camera2 capabilities the
+#   HAL exposes at runtime (hardware level, supported streams, available characteristics).
+#   For CameraX Extensions (bokeh, HDR, night, face retouch, auto modes), the Xiaomi
+#   camera HAL would need to implement android.hardware.camera.provider@2.7 extensions
+#   HAL (OEM extension interface) and expose them via Camera2 ExtensionSessionConfiguration.
+#   The vendor blob camera.provider@2.7-impl-vcamera.so already references provider 2.7;
+#   whether CamX extensions are wired in depends on the extracted camera HAL blobs.
+#   Evaluation path: build a test APK using androidx.camera:camera-extensions, call
+#   ExtensionsManager.isExtensionAvailable(), and check logcat for extension negotiation.
 $(call inherit-product-if-exists, vendor/xiaomi/camera/miuicamera.mk)
 
 PRODUCT_COPY_FILES += \
