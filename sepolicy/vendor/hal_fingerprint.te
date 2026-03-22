@@ -11,6 +11,11 @@ allow hal_fingerprint_default platform_app:fd *;
 allow hal_fingerprint_default system_app:binder { call transfer };
 allow hal_fingerprint_default system_app:binder transfer;
 allow hal_fingerprint_default system_app:fd *;
+# TODO: sysfs:file write is overly broad (grants write to all unlabeled sysfs
+# nodes).  Identify the specific sysfs path used by the UDFP sensor and label
+# it with a dedicated type (e.g. vendor_sysfs_udfp) so this can be narrowed.
+# Leaving as-is for now; a neverallow exemption may be required in the
+# compatibility matrix if AOSP ever rejects this for vendor domains.
 allow hal_fingerprint_default sysfs:file write;
 allow hal_fingerprint_default vendor_sysfs_spss:dir search;
 allow hal_fingerprint_default vendor_sysfs_spss:file { open read };
