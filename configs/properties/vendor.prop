@@ -21,11 +21,11 @@ persist.vendor.qcom.bluetooth.aac_vbr_ctl.enabled=true
 persist.vendor.qcom.bluetooth.aptxadaptiver2_1_support=true
 
 # Camera
-# ZSL enabled for Camera2 complete control: allows CONTROL_CAPTURE_INTENT_ZERO_SHUTTER_LAG,
-# burst capture, and reprocessing streams. The HAL maintains a circular pre-capture buffer
-# so stills can be pulled from a running preview without a capture latency penalty.
-camera.disable_zsl_mode=false
-ro.camera.enableCamera1MaxZsl=1
+# ZSL disabled pending HAL compatibility validation on the Xiaomi CamX stack.
+# Re-enable by setting camera.disable_zsl_mode=false and ro.camera.enableCamera1MaxZsl=1
+# once confirmed that CONTROL_CAPTURE_INTENT_ZERO_SHUTTER_LAG does not crash cameraserver.
+camera.disable_zsl_mode=true
+ro.camera.enableCamera1MaxZsl=0
 
 # Display
 persist.sys.sf.native_mode=257

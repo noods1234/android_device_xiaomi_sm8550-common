@@ -101,8 +101,8 @@ PRODUCT_PACKAGES += \
 #   camera.full             — Camera2 FULL level (manual sensor, manual lens, RAW, ZSL, reprocessing)
 #   camera.raw              — RAW_SENSOR output stream
 #   camera.concurrent       — simultaneous front+rear streaming
-# ZSL is re-enabled in vendor.prop (camera.disable_zsl_mode=false) to expose
-# CONTROL_CAPTURE_INTENT_ZERO_SHUTTER_LAG, burst capture, and YUV reprocessing.
+# ZSL is disabled in vendor.prop until HAL compatibility is confirmed (see #3).
+# To re-enable: camera.disable_zsl_mode=false, ro.camera.enableCamera1MaxZsl=1.
 #
 # CameraX (future builds):
 #   CameraX is an AndroidX Jetpack library that wraps Camera2. No device-tree changes
