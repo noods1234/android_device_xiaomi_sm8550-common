@@ -170,7 +170,7 @@ on post-fs-data
 
     chmod 0666 /dev/metis
     restorecon /dev/metis
-    chown 0666 /sys/module/metis/parameters
+    chown root system /sys/module/metis/parameters
     chmod 0664 /sys/module/metis/parameters/add_rebind_task_lit
     chmod 0664 /sys/module/metis/parameters/add_rebind_task_mid
     chmod 0664 /sys/module/metis/parameters/add_rebind_task_big
@@ -283,7 +283,7 @@ on post-fs-data
     chmod 0664 /sys/class/leds/led:switch_2/trigger
     chmod 0664 /sys/class/leds/led:switch_3/trigger
     chmod 0664 /sys/class/leds/flashlight/brightness
-    
+
     #QCC mode configuration
     setprop vendor.qti.qcc.oper.mode 3
 
@@ -318,6 +318,8 @@ on boot
     # Camera provider memory soft limit (4 GiB): covers ZSL pre-capture buffer,
     # encoder I/O, and IPC shared memory.  Triggers page reclaim before OOM killer;
     # too high a value provides no backstop.
+    mkdir /dev/memcg/camera 0755 root system
+    mkdir /dev/memcg/camera/provider 0755 root system
     write /dev/memcg/camera/provider/memory.soft_limit_in_bytes 4294967296
 
     # Control small-window through joyose
@@ -490,11 +492,11 @@ on property:vendor.hardware.wlan.runsniffer=stop
 on property:vendor.hardware.wlan.runsniffer=start
      start vendor.sniffer
 
- on property:vendor.hardware.wlan.runsniffer.circular=stop
-     stop vendor.sniffer.circular
+on property:vendor.hardware.wlan.runsniffer.circular=stop
+    stop vendor.sniffer.circular
 
- on property:vendor.hardware.wlan.runsniffer.circular=start
-     start vendor.sniffer.circular
+on property:vendor.hardware.wlan.runsniffer.circular=start
+    start vendor.sniffer.circular
 
 service vendor.tcpdump /vendor/bin/tcpdump -i any -W 3 -C 5 -s 134 -w /data/vendor/wlan_logs/tcpdump.pcap -Z system
     class main
