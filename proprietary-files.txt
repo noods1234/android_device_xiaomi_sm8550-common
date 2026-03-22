@@ -69,7 +69,6 @@ odm/lib64/libcrussp.so
 vendor/etc/models/acd/event.eai
 vendor/etc/models/acd/music.eai
 vendor/etc/models/acd/speech.eai
-vendor/etc/audio_cloud_control_white_list.xml
 vendor/etc/misound_asc_model.tflite
 vendor/lib64/hw/audio.primary.kalama.so;MODULE_SUFFIX=_sm8550;OVERRIDES=audio.primary.kalama
 vendor/lib64/hw/gyro_fusion_interface.so
@@ -1074,7 +1073,6 @@ vendor/etc/init/dataqti.rc
 vendor/etc/init/ims-dataservice-daemon.rc
 vendor/etc/init/ims_rtp_daemon.rc
 vendor/etc/init/imsdaemon.rc
-vendor/etc/init/ipa_fws.rc
 vendor/etc/init/libxiaomi_qcril.rc
 vendor/etc/init/netmgrd.rc
 vendor/etc/init/port-bridge.rc
